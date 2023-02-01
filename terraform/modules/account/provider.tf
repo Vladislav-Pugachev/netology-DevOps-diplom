@@ -3,11 +3,14 @@ terraform {
     yandex = {
       source = "yandex-cloud/yandex"
       version = "0.84.0"
+      configuration_aliases = [ yandex.account ]
     }
   }
 }
 
+
 provider "yandex" {
-  token     = var.token
-  cloud_id  = var.cloud_id
+ alias = "account"
+ token     = var.token
+ cloud_id  = var.cloud_id
 }
