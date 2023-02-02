@@ -12,9 +12,9 @@ provider "yandex" {
  cloud_id  = var.cloud_id
 }
 provider "yandex" {
-  alias = "pvc"
+  alias = "vpc"
   cloud_id  = var.cloud_id
-  service_account_key_file = data.local_file.key-json.content
+  service_account_key_file = data.local_file.admin-resourse-cred-json.content
   folder_id= data.yandex_resourcemanager_folder.folder.id
 }
 

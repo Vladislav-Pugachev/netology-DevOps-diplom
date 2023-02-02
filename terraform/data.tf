@@ -7,8 +7,8 @@ data "yandex_resourcemanager_folder" "folder" {
     ]
 }
 
-data "local_file" "key-json" {
-    filename = "./key.json"
+data "local_file" "admin-resourse" {
+    filename = "./admin-resourse.json"
     depends_on = [
       module.account
     ]
