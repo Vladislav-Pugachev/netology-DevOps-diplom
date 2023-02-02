@@ -7,10 +7,3 @@ terraform {
     }
   }
 }
-
-
-provider "yandex" {
- alias = "account"
- token     = var.token
- cloud_id  = var.cloud_id
-}

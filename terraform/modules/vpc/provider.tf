@@ -8,22 +8,8 @@ terraform {
   }
 }
 
-provider "yandex" {
-  alias = "pvc"
-  cloud_id  = var.cloud_id
-  service_account_key_file = data.local_file.key-json.content
-  folder_id= data.yandex_resourcemanager_folder.folder.id
-}
 
 resource "yandex_vpc_network" "default" {
+folder_id = var.folder_id 
   name = "foobar"
-}
-
-data "yandex_resourcemanager_folder" "folder" {
-    name     = "folder-${terraform.workspace}"
-  cloud_id = var.cloud_id
-}
-
-data "local_file" "key-json" {
-    filename = "./key.json"
 }
