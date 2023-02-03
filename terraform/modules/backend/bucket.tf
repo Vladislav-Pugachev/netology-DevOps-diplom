@@ -1,6 +1,6 @@
 resource "yandex_storage_bucket" "bucket" {
-  access_key = local.local_data.access_key
-  secret_key = local.local_data.secret_key
+  access_key = var.access_key
+  secret_key = var.secret_key
   acl = "public-read-write"
   bucket     = "pvv-netology-diplom-env-${terraform.workspace}"
   server_side_encryption_configuration {

@@ -27,6 +27,8 @@ module "backend" {
     source = "./modules/backend"
     token     = var.token
     cloud_id  = var.cloud_id
+    access_key = local.local_data.access_key
+    secret_key = local.local_data.secret_key
     folder_id = data.yandex_resourcemanager_folder.folder.folder_id
         providers = {
        yandex.vpc = yandex.vpc

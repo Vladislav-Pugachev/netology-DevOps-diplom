@@ -13,3 +13,10 @@ data "local_file" "admin-resourse" {
       module.account
     ]
 }
+
+data "local_file" "admin-bucket" {
+    filename = "./editor-backet.json"
+    depends_on = [
+      module.account
+    ]
+}

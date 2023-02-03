@@ -58,5 +58,17 @@ resource "local_file" "aws-config" {
     "secret_key" = yandex_iam_service_account_static_access_key.editor-backet-static-key.secret_key
     "access_key"  = yandex_iam_service_account_static_access_key.editor-backet-static-key.access_key
 })
-  filename = "~/.aws/credentials"
+  filename = "./aws/credentials"
+    provisioner "local-exec" {
+    command = "ln -s $(pwd)/aws/credentials $HOME/.aws/credentials"
+  }
 }
+
+# resource "null_resource" "aws_config" {
+#   depends_on = [
+#     local_file.aws-config
+#   ]
+#     provisioner "local-exec" {
+#     command = "ln -s $(pwd)/aws/credentials $HOME/.aws/credentials"
+#   }
+# }
