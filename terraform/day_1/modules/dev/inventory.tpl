@@ -1,33 +1,30 @@
 all:
   hosts:
-    ${control_node_name}:
+    ${control_node_hostname}:
       ansible_host: ${control_node_private_ip}
       ip: ${control_node_private_ip}
-      access_ip: ${control_node_private_ip}
-      vars:
-        supplementary_addresses_in_ssl_keys: ['${control_node_ext_ip}']
-    worker-1:
-      ansible_host: 10.10.1.2
-      ip: 10.10.1.2
-      access_ip: 10.10.1.2
-    worker-2:
-      ansible_host: 10.10.1.5
-      ip: 10.10.1.5
-      access_ip: 10.10.1.5
+%{for node in worker_nodes~}
+    ${node.hostname}:
+      ansible_host: ${node.network_interface.0.ip_address}
+      ip: ${node.network_interface.0.ip_address}
+%{ endfor ~}
   children:
     kube_control_plane:
       hosts:
-        "${control_node_name}":
+        ${control_node_hostname}:
     kube_node:
       hosts:
-        worker-1:
-        worker-2:
+%{for node in worker_nodes~}
+        ${node.hostname}:
+%{ endfor ~}
     etcd:
       hosts:
-        "${control_node_name}":
+        ${control_node_hostname}:
     k8s_cluster:
       children:
         kube_control_plane:
         kube_node:
+      vars:
+        supplementary_addresses_in_ssl_keys: ['${control_node_ext_ip}']
     calico_rr:
       hosts: {}

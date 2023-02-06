@@ -1,6 +1,13 @@
+#!/bin/bash
 sudo apt update
-sudo apt install git python pip3 -y
+timeout 1m
+sudo apt install git python pip -y
+timeout 2m
+git clone https://github.com/kubernetes-sigs/kubespray.git
+timeout 1m
+cd kubespray
 sudo pip3 install -r requirements.txt
-cp -r inventory/sample inventory/mycluster
-declare -a IPS=(10.10.1.3 10.10.1.4 10.10.1.5)
-CONFIG_FILE=inventory/mycluster/hosts.yml python3 contrib/inventory_builder/inventory.py ${IPS[@]
+cp -rfp inventory/sample inventory/mycluster
+cp ~/host.yml inventory/mycluster/host.yml
+sudo chown 0600 ~/.ssh/id_rsa
+ansible-playbook -i inventory/mycluster/hosts.yaml cluster.yml -b -v -e 'cluster_access_ip=${yandex_compute_instance.control_node.network_interface.0.nat_ip_address}:6443'

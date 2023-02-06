@@ -1,7 +1,7 @@
 resource "yandex_compute_instance" "worker_node" {
     count = length(["ru-central1-b", "ru-central1-c"])
-    name = "control-node-${index(["ru-central1-b", "ru-central1-c"],(["ru-central1-b", "ru-central1-c"][count.index]))+1}-${terraform.workspace}"
-    hostname = "control-node-${index(["ru-central1-b", "ru-central1-c"],(["ru-central1-b", "ru-central1-c"][count.index]))+1}-${terraform.workspace}"
+    name = "worker-node-${index(["ru-central1-b", "ru-central1-c"],(["ru-central1-b", "ru-central1-c"][count.index]))+1}-${terraform.workspace}"
+    hostname = "worker-node-${index(["ru-central1-b", "ru-central1-c"],(["ru-central1-b", "ru-central1-c"][count.index]))+1}-${terraform.workspace}"
     zone = ["ru-central1-b", "ru-central1-c"][count.index]
     platform_id = "standard-v1"
     folder_id = var.folder_id

@@ -1,0 +1,10 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: install
+      ansible.builtin.apt:
+        pkg:
+          - git
+          - python3
+          - pip
+        update_cache: yes

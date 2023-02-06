@@ -21,5 +21,4 @@ resource "yandex_compute_instance" "control_node" {
     metadata = {
         user-data = "${file("./users.yml")}"
   }
-
 }
