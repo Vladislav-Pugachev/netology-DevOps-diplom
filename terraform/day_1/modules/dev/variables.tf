@@ -1,4 +1,4 @@
-variable "folder_id_dev" {
+variable "folder_id" {
   description =  "Yandex folder_id dev"
   type = string
 }
@@ -6,4 +6,19 @@ variable "folder_id_dev" {
 variable "cloud_id" {
   description =  "Yandex cloud_id"
   type = string
+}
+
+variable "subnet" {
+  description =  "Yandex subnet"
+  type = map
+}
+
+variable "k8s_contole_node" {
+  description =  "мощности для control node"
+  type = map
+}
+
+variable "k8s_contole_worker" {
+  description =  "мощности для worker node"
+  type = map
 }

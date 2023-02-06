@@ -1,5 +1,5 @@
 
-resource "yandex_vpc_network" "default" {
-  name = "foobar"
-  folder_id = var.folder_id_dev
+resource "yandex_vpc_network" "underlay" {
+  name = "underlay-${terraform.workspace}"
+  folder_id = var.folder_id
 }

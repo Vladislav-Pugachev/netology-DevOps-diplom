@@ -18,7 +18,10 @@ terraform {
     dynamodb_table = "${dynamodb_table}"    
 }
 }
-
+provider "yandex" {
+ token     = var.token
+ cloud_id  = var.cloud_id
+}
 %{ for folder in "${folder_id}"~}
 provider "yandex" {
   alias = "${folder}"

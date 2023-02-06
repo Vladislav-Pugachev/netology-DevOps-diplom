@@ -1,4 +1,4 @@
-variable "folder_id_prod" {
+variable "folder_id" {
   description =  "Yandex folder_id prod"
   type = string
 }
