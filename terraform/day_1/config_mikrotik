@@ -1,0 +1,23 @@
+[admin@MikroTik] > export
+# feb/07/2023 12:22:34 by RouterOS 6.45.9
+# software id = 
+#
+#
+#
+/interface ethernet
+set [ find default-name=ether1 ] disable-running-check=no
+set [ find default-name=ether2 ] disable-running-check=no
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/ip address
+add address=10.0.0.254/24 interface=ether2 network=10.0.0.0
+/ip dhcp-client
+add dhcp-options=hostname,clientid disabled=no interface=ether1
+/ip firewall nat
+add action=dst-nat chain=dstnat dst-address=158.160.57.42 dst-port=6443 log=yes protocol=tcp to-addresses=192.168.1.254 to-ports=6443
+add action=dst-nat chain=dstnat dst-address=158.160.57.42 dst-port=2222 protocol=tcp to-addresses=192.168.1.254 to-ports=2222
+add action=dst-nat chain=dstnat dst-address=192.168.1.254 dst-port=6443 log=yes protocol=tcp to-addresses=10.0.0.25 to-ports=6443
+add action=dst-nat chain=dstnat dst-address=192.168.1.254 dst-port=2222 log=yes protocol=tcp to-addresses=10.0.0.25 to-ports=22
+add action=masquerade chain=srcnat out-interface=ether1 src-address=10.0.0.0/16
+/ip service
+set ssh disabled=yes

@@ -25,6 +25,6 @@ all:
         kube_control_plane:
         kube_node:
       vars:
-        supplementary_addresses_in_ssl_keys: ['${control_node_ext_ip}']
+        supplementary_addresses_in_ssl_keys: ['${nat_ext_ip}']
     calico_rr:
       hosts: {}

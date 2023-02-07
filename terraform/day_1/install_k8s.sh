@@ -10,4 +10,4 @@ sudo pip3 install -r requirements.txt
 cp -rfp inventory/sample inventory/mycluster
 cp ~/host.yml inventory/mycluster/host.yml
 sudo chown 0600 ~/.ssh/id_rsa
-ansible-playbook -i inventory/mycluster/hosts.yaml cluster.yml -b -v -e 'cluster_access_ip=${yandex_compute_instance.control_node.network_interface.0.nat_ip_address}:6443'
+ansible-playbook -i inventory/mycluster/hosts.yaml cluster.yml -b -v -e 'cluster_access_ip=84.201.173.178:6443'
