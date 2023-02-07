@@ -19,12 +19,33 @@ resource "yandex_compute_instance" "nat" {
         subnet_id = yandex_vpc_subnet.nat.id
         ip_address = "192.168.1.254"
     }
-    network_interface {
-    nat = false
-    subnet_id = yandex_vpc_subnet.subnet["ru-central1-a"].id
-    ip_address = "10.0.0.254"
-    }
     metadata = {
         user-data = "${file("./users.yml")}"
+  }
+}
+
+resource "local_file" "mikrotik_yml" {
+  depends_on = [
+    yandex_compute_instance.control_node,
+    yandex_compute_instance.nat
+  ]
+  content     = templatefile("./modules/dev/mikrotik.tpl",
+  {
+    nat_ext_ip = yandex_compute_instance.nat.network_interface.0.nat_ip_address
+    nat_private_ip = yandex_compute_instance.nat.network_interface.0.ip_address
+    control_node_private_ip = yandex_compute_instance.control_node.network_interface.0.ip_address
+    workspace = terraform.workspace
+    mikrotik_login = var.mikrotik_login
+    mikrotik_pass = var.mikrotik_pass
+})
+  filename = "./mikrotik.yml"
+}
+
+resource "null_resource" "deploy_mikrotik" {
+  depends_on = [
+    local_file.mikrotik_yml
+  ]
+  provisioner "local-exec" {
+    command = "ansible-playbook -i ${yandex_compute_instance.nat.network_interface.0.nat_ip_address}, --timeout=120 mikrotik.yml"
   }
 }

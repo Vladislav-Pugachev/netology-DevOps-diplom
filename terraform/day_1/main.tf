@@ -9,6 +9,8 @@ module "dev" {
     subnet = var.subnet_dev
     k8s_contole_node = var.k8s_contole_node_dev
     k8s_contole_worker = var.k8s_contole_worker_dev
+    mikrotik_login=var.mikrotik_login
+    mikrotik_pass=var.mikrotik_pass
 }
 
 module "prod" {
@@ -19,4 +21,6 @@ module "prod" {
      }
     cloud_id  = var.cloud_id
     folder_id = var.folder_id_prod
+    mikrotik_login=var.mikrotik_login
+    mikrotik_pass=var.mikrotik_pass
 }

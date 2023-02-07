@@ -5,3 +5,4 @@ resource "local_file" "script-k8s" {
 })
   filename = "./script.sh"
 }
+
