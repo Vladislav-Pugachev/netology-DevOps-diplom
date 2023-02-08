@@ -21,6 +21,4 @@ module "prod" {
      }
     cloud_id  = var.cloud_id
     folder_id = var.folder_id_prod
-    mikrotik_login=var.mikrotik_login
-    mikrotik_pass=var.mikrotik_pass
 }

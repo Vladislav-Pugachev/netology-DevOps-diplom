@@ -24,5 +24,6 @@
         - /ip service set api-ssl disabled=yes
         - user add name=vlad password=netology_admin group=full
         - user disable admin
-        - system license renew account=********** password=********* level=p1
+        - /system license renew account=${mikrotik_login} password=${mikrotik_pass} level=p1
+      wait_for: result[0] contains mikrotik_node_${workspace}
 

@@ -1,4 +1,7 @@
 resource "yandex_compute_instance" "nat" {
+    depends_on = [
+      yandex_vpc_route_table.default
+    ]
     name = "mikrotik-node-${terraform.workspace}"
     hostname = "mikrotik-node-${terraform.workspace}"
     zone = "ru-central1-a"
@@ -11,7 +14,8 @@ resource "yandex_compute_instance" "nat" {
     boot_disk {
       initialize_params {
         image_id = "fd84rbp1354f0g87qsup"
-        size = 5
+        size = 2
+        type="network-ssd"
       }
     }
     network_interface {
@@ -25,10 +29,7 @@ resource "yandex_compute_instance" "nat" {
 }
 
 resource "local_file" "mikrotik_yml" {
-  depends_on = [
-    yandex_compute_instance.control_node,
-    yandex_compute_instance.nat
-  ]
+  depends_on = [yandex_compute_instance.worker_node]
   content     = templatefile("./modules/dev/mikrotik.tpl",
   {
     nat_ext_ip = yandex_compute_instance.nat.network_interface.0.nat_ip_address
@@ -42,9 +43,7 @@ resource "local_file" "mikrotik_yml" {
 }
 
 resource "null_resource" "deploy_mikrotik" {
-  depends_on = [
-    local_file.mikrotik_yml
-  ]
+  depends_on = [local_file.mikrotik_yml]
   provisioner "local-exec" {
     command = "ansible-playbook -i ${yandex_compute_instance.nat.network_interface.0.nat_ip_address}, --timeout=120 mikrotik.yml"
   }

@@ -1,4 +1,5 @@
 resource "yandex_compute_instance" "worker_node" {
+    depends_on = [yandex_compute_instance.nat,yandex_compute_instance.control_node]
     count = length(["ru-central1-b", "ru-central1-c"])
     name = "worker-node-${index(["ru-central1-b", "ru-central1-c"],(["ru-central1-b", "ru-central1-c"][count.index]))+1}-${terraform.workspace}"
     hostname = "worker-node-${index(["ru-central1-b", "ru-central1-c"],(["ru-central1-b", "ru-central1-c"][count.index]))+1}-${terraform.workspace}"

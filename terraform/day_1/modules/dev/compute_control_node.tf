@@ -1,4 +1,5 @@
 resource "yandex_compute_instance" "control_node" {
+  depends_on = [yandex_compute_instance.nat]
     name = "control-node-${terraform.workspace}"
     hostname = "control-node-${terraform.workspace}"
     zone = "ru-central1-a"

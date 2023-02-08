@@ -26,3 +26,17 @@ module "provider" {
     source = "./modules/provider"
     depends_on = [module.backend]
 } 
+
+resource "local_file" "tfvars" {
+#    for_each = data.yandex_resourcemanager_folder.folder["${each.key}"]
+  content     = templatefile("./tfvars.tpl",
+  {
+    cloud_id= "${var.cloud_id}"
+    token = "${var.cloud_id}"
+    mikrotik_login="${var.mikrotik_login}"
+    mikrotik_pass="${var.mikrotik_pass}"
+    folders = data.yandex_resourcemanager_folder.folder
+
+})
+  filename = "../day_1/terraform.tfvars"
+}
