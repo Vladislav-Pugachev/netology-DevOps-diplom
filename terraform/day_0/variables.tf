@@ -24,13 +24,3 @@ variable "env_day_1" {
   type = list
   default =  ["dev", "prod"]
 }
-
-variable "mikrotik_login" {
-  description =  "логин mikrotik.com"
-  type = string
-}
-
-variable "mikrotik_pass" {
-  description =  "пароль mikrotik.com"
-  type = string
-}

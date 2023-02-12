@@ -22,13 +22,3 @@ variable "k8s_contole_worker" {
   description =  "мощности для worker node"
   type = map
 }
-
-variable "mikrotik_login" {
-  description =  "логин mikrotik.com"
-  type = string
-}
-
-variable "mikrotik_pass" {
-  description =  "пароль mikrotik.com"
-  type = string
-}

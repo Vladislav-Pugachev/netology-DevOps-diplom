@@ -36,8 +36,6 @@ resource "local_file" "mikrotik_yml" {
     nat_private_ip = yandex_compute_instance.nat.network_interface.0.ip_address
     control_node_private_ip = yandex_compute_instance.control_node.network_interface.0.ip_address
     workspace = terraform.workspace
-    mikrotik_login = var.mikrotik_login
-    mikrotik_pass = var.mikrotik_pass
 })
   filename = "./mikrotik.yml"
 }
