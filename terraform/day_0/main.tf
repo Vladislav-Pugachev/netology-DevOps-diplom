@@ -22,13 +22,27 @@ module "backend" {
     depends_on = [module.folder]
 } 
 
+module "nat" {
+    source = "./modules/nat"
+    token     = var.token
+    cloud_id  = var.cloud_id
+    depends_on = [module.folder]
+} 
+
+module "web-app" {
+    source = "./modules/web_app"
+    token     = var.token
+    cloud_id  = var.cloud_id
+    depends_on = [module.folder]
+} 
+
+
 module "provider" {
     source = "./modules/provider"
     depends_on = [module.backend]
 } 
 
 resource "local_file" "tfvars" {
-#    for_each = data.yandex_resourcemanager_folder.folder["${each.key}"]
   content     = templatefile("./tfvars.tpl",
   {
     cloud_id= var.cloud_id

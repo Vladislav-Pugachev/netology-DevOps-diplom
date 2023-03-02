@@ -6,7 +6,7 @@ resource "yandex_compute_instance" "nat" {
     hostname = "mikrotik-node-${terraform.workspace}"
     zone = "ru-central1-a"
     platform_id = "standard-v1"
-    folder_id = var.folder_id
+    folder_id = data.yandex_resourcemanager_folder.folder.id
     resources {
       cores = 2
       memory = 2
@@ -29,12 +29,12 @@ resource "yandex_compute_instance" "nat" {
 }
 
 resource "local_file" "mikrotik_yml" {
-  depends_on = [yandex_compute_instance.worker_node]
-  content     = templatefile("./modules/dev/mikrotik.tpl",
+#  depends_on = [yandex_compute_instance.worker_node]
+  content     = templatefile("./modules/nat/mikrotik.tpl",
   {
     nat_ext_ip = yandex_compute_instance.nat.network_interface.0.nat_ip_address
     nat_private_ip = yandex_compute_instance.nat.network_interface.0.ip_address
-    control_node_private_ip = yandex_compute_instance.control_node.network_interface.0.ip_address
+#    control_node_private_ip = yandex_compute_instance.control_node.network_interface.0.ip_address
     workspace = terraform.workspace
 })
   filename = "./mikrotik.yml"

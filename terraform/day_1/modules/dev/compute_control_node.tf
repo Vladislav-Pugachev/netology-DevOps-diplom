@@ -18,6 +18,7 @@ resource "yandex_compute_instance" "control_node" {
     network_interface {
         nat = false
         subnet_id = yandex_vpc_subnet.subnet["ru-central1-a"].id
+        ip_address = "10.0.0.1"
     }
     metadata = {
         user-data = "${file("./users.yml")}"

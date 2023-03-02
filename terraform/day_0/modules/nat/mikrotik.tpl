@@ -14,8 +14,8 @@
         - /system identity set name=mikrotik_node_${workspace}
         - /ip firewall nat add action=dst-nat chain=dstnat dst-address=${nat_ext_ip} dst-port=6443 log=yes protocol=tcp to-addresses=${nat_private_ip} to-ports=6443
         - /ip firewall nat add action=dst-nat chain=dstnat dst-address=${nat_ext_ip} dst-port=2222 protocol=tcp to-addresses=${nat_private_ip} to-ports=2222
-        - /ip firewall nat add action=dst-nat chain=dstnat dst-address=${nat_private_ip} dst-port=6443 log=yes protocol=tcp to-addresses=${control_node_private_ip} to-ports=6443
-        - /ip firewall nat add action=dst-nat chain=dstnat dst-address=${nat_private_ip} dst-port=2222 log=yes protocol=tcp to-addresses=${control_node_private_ip} to-ports=22
+        - /ip firewall nat add action=dst-nat chain=dstnat dst-address=${nat_private_ip} dst-port=6443 log=yes protocol=tcp to-addresses=10.0.0.1 to-ports=6443
+        - /ip firewall nat add action=dst-nat chain=dstnat dst-address=${nat_private_ip} dst-port=2222 log=yes protocol=tcp to-addresses=10.0.0.1 to-ports=22
         - /ip firewall nat add action=masquerade chain=srcnat
         - /ip service set telnet disabled=yes
         - /ip service set ftp disabled=yes
