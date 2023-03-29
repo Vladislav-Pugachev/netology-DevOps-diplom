@@ -1,5 +1,6 @@
 resource "yandex_compute_instance" "control_node" {
-  depends_on = [yandex_compute_instance.nat]
+  provider = yandex.dev
+  depends_on = [yandex_vpc_subnet.subnet-nat]
     name = "control-node-${terraform.workspace}"
     hostname = "control-node-${terraform.workspace}"
     zone = "ru-central1-a"
@@ -18,7 +19,6 @@ resource "yandex_compute_instance" "control_node" {
     network_interface {
         nat = false
         subnet_id = yandex_vpc_subnet.subnet["ru-central1-a"].id
-        ip_address = "10.0.0.1"
     }
     metadata = {
         user-data = "${file("./users.yml")}"

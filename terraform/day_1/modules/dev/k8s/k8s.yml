@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      namespace: default
+      labels:
+        app: hello
+    spec:
+      containers:
+        - name: hello-world
+          image: cr.yandex/crpn33kvf5b49580aa0u/hello:__VERSION__
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: user-registry

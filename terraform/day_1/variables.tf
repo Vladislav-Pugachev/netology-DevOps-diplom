@@ -12,4 +12,3 @@ variable "token" {
   description =  "Yandex token"
   type = string
 }
-

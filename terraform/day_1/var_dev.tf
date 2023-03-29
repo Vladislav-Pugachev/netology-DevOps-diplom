@@ -4,7 +4,7 @@ variable "folder_id_dev" {
 }
 
 variable "subnet_dev" {
-    description = "подсети. окружение dev"
+    description = "подсети. Окружение dev"
     type= map
     default = {
         "ru-central1-a" = "10.0.0.0/24"

@@ -22,11 +22,11 @@ provider "yandex" {
  token     = var.token
  cloud_id  = var.cloud_id
 }
-%{ for folder in "${folder_id}"~}
+%{ for folder in folders~}
 provider "yandex" {
-  alias = "${folder}"
+  alias = "${folder.description}"
   cloud_id  = var.cloud_id
-  service_account_key_file = "$${file("admin-resourse-env-${folder}.json")}"
-  folder_id= var.folder_id_${folder}
+  service_account_key_file = "./admin-resourse-env-${folder.description}.json"
+  folder_id= var.folder_id_${folder.description}
 }
 %{ endfor ~}
