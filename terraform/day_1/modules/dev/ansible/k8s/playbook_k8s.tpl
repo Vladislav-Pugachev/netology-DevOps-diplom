@@ -33,6 +33,6 @@
         src: ./ssh/id_rsa
         dest: .ssh/id_rsa
         owner: vlad
-        group: vlad
+        group: v
         mode: '0600'
       become: yes

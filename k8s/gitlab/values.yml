@@ -1,7 +1,7 @@
 ---
 imagePullPolicy: IfNotPresent
-gitlabUrl: http://51.250.69.185
-runnerRegistrationToken: "GR1348941sD2yK1F8YU8xDLsJCs6k"
+gitlabUrl: ip_ci_cd
+runnerRegistrationToken: "token_ci_cd"
 terminationGracePeriodSeconds: 3600
 concurrent: 10
 checkInterval: 30
@@ -17,7 +17,6 @@ rbac:
 runners:
   config: |
     [[runners]]
-      tags = "devlever"
       [runners.kubernetes]
         namespace = "{{.Release.Namespace}}"
         image = "ubuntu:20.04"

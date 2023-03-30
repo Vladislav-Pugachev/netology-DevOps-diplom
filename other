@@ -1,4 +1,6 @@
 cat user-registry.json | docker login   --username json_key   --password-stdin   cr.yandex
 terraform destroy -target=module.vpc -target=module.ci_cd -target=module.backend -target=module.web-app -target=module.registry -auto-approve
 kubectl create secret generic regcred     --from-file=.dockerconfigjson=$HOME/.docker/config.json   --type=kubernetes.io/dockerconfigjson
-helm install --namespace default gitlab-runner -f modules/dev/k8s/values.yml --set runners.tags="k8s-heavy-load" ./gitlab-runner-0.51.0.tgz 
+helm install --namespace default gitlab-runner -f values.yml --set runners.tags="k8s-dev" ./gitlab-runner-0.51.0.tgz sudo apt install jq
+
+kubectl create secret generic webapp --from-literal access_key=$(cat user-web.json |  jq '.access_key') --from-literal secret_key=$(cat user-web.json |  jq '.secret_key')
