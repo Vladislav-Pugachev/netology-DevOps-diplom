@@ -43,4 +43,4 @@
         protocol: tcp
         jump: DNAT
         to_destination: ${control_node_private_ip}:6443
-      become: yes      
+      become: yes 

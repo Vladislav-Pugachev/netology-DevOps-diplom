@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: hello-world
-          image: cr.yandex/crpn33kvf5b49580aa0u/hello:__VERSION__
+          image: cr.yandex/crprsbkmreld0gpt1k7q/hello:__VERSION__
           imagePullPolicy: Always
       imagePullSecrets:
         - name: user-registry

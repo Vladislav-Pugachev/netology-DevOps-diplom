@@ -6,3 +6,4 @@
 terraform/day_1/provider.tf
 ssh
 users.yml
+aws

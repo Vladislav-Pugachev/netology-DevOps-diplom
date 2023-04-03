@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: web
   name: web
 spec:
   replicas: 1
@@ -26,7 +24,7 @@ spec:
               secretKeyRef:
                 name: webapp
                 key: secret_key
-          image: cr.yandex/crphale4jc7cn8jf9u2f/web_app:980db813
+          image: cr.yandex/crprsbkmreld0gpt1k7q/web_app:fc54edaf
           ports:
             - containerPort: 8080
           imagePullPolicy: Always

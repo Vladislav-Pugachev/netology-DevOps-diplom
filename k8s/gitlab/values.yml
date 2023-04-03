@@ -1,7 +1,7 @@
 ---
 imagePullPolicy: IfNotPresent
-gitlabUrl: ip_ci_cd
-runnerRegistrationToken: "token_ci_cd"
+gitlabUrl:   ip
+runnerRegistrationToken: "token"
 terminationGracePeriodSeconds: 3600
 concurrent: 10
 checkInterval: 30
