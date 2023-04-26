@@ -1,0 +1,18 @@
+all:
+  children:
+    bgw:
+      hosts:
+        ansible_host: 10.0.3.254
+    k8s:
+      children:
+        control-node:
+          hosts:
+            ansible_host: 10.0.0.254
+        worker-node:
+          hosts:
+            worker-1:
+              ansible_host: 10.0.1.254
+            worker-2:
+              ansible_host: 10.0.1.254 
+      vars:
+

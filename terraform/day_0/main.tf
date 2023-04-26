@@ -31,11 +31,11 @@ module "backend" {
     depends_on = [module.account]
 } 
 
-# module "nat" {
-#     source = "./modules/nat"
-#     cloud_id  = var.cloud_id
-#     depends_on = [module.vpc]
-# } 
+module "bgw" {
+    source = "./modules/bgw"
+    cloud_id  = var.cloud_id
+    depends_on = [module.vpc]
+} 
 
 module "web-app" {
     source = "./modules/web_app"
@@ -52,9 +52,10 @@ module "ci_cd" {
 } 
 module "provider" {
     source = "./modules/provider"
+    depends_on = [module.backend]
     cloud_id  = var.cloud_id
     access_key= module.account.user-access-key-cred-backend
     secret_key= module.account.user-secret-key-cred-backend
     yadb_endpoint=module.backend.yadb_endpoint
-    depends_on = [module.backend]
+    bgw_ip_ext=module.bgw.bgw_external_ip
 } 

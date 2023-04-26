@@ -1,0 +1,3 @@
+[submodule "k8s/mon/vendor/prom"]
+	path = k8s/mon/vendor/prom
+	url = https://github.com/prometheus-community/helm-charts.git
