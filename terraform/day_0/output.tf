@@ -6,6 +6,6 @@ output "registry" {
 value= module.registry.registry_id
 }
 
-output "bgw_ext_ip" {
-value= module.bgw.bgw_external_ip
+output "admin_bgw_external_ip" {
+value= module.bgw.admin_bgw_external_ip
 }

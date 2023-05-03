@@ -1,9 +1,10 @@
-variable "node_network_k8s" {
-    description = "подсети для k8s"
+variable "nodes_private_ip_k8s" {
+    description = "ip адреса k8s"
     type= map
 }
 
-variable "node_network_bgw" {
-    description = "подсеть для bgw"
+
+variable "node_private_ip_bgw" {
+    description = "ip адрес bgw"
     type= map
 }

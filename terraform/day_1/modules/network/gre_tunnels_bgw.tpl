@@ -9,10 +9,10 @@ network:
     gre-to-${key}:
       mode: gre
       local: ${local}
-      remote: ${cidrhost(values,253)}
+      remote: ${values}
       addresses:
         - ${cidrhost(addresses_tunnel[key],1)}/30
       routes:
-        - to: ${cidrhost(values,254)}/32
+        - to: ${cidrhost(join("/",[values,24]),254)}/32
           via: ${cidrhost(addresses_tunnel[key],2)}
 %{ endfor ~}

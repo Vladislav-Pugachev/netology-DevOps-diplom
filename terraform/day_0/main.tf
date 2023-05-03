@@ -57,5 +57,6 @@ module "provider" {
     access_key= module.account.user-access-key-cred-backend
     secret_key= module.account.user-secret-key-cred-backend
     yadb_endpoint=module.backend.yadb_endpoint
-    bgw_ip_ext=module.bgw.bgw_external_ip
+    admin_bgw_external_ip=module.bgw.admin_bgw_external_ip
+    admin_bgw_internal_ip=module.bgw.admin_bgw_internal_ip
 } 

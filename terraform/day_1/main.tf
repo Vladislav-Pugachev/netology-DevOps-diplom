@@ -55,6 +55,6 @@ module "k8s" {
 module "network" {
   depends_on = [module.k8s, module.bgw]
     source = "./modules/network"
-    node_network_k8s=module.k8s.node_network_k8s
-    node_network_bgw=module.bgw.node_network_bgw
+    nodes_private_ip_k8s=module.k8s.nodes_private_ip_k8s
+    node_private_ip_bgw=module.bgw.node_private_ip_bgw
 }

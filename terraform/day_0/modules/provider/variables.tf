@@ -28,7 +28,12 @@ variable "secret_key" {
   sensitive = true
 }
 
-variable "bgw_ip_ext" {
+variable "admin_bgw_external_ip" {
   description = "внешний адрес bgw"
+  type = string
+}
+
+variable "admin_bgw_internal_ip" {
+  description = "внутренний адрес bgw"
   type = string
 }
