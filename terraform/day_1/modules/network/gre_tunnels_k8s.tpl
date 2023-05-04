@@ -9,7 +9,7 @@ network:
         - to: ${remote}/32
           via: ${local_gw}  
   tunnels:
-    gre-${name}:
+    to_bgw:
       mode: gre
       local: ${local}
       remote: ${remote}
