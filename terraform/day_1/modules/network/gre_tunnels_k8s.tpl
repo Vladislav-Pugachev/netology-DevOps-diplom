@@ -4,6 +4,10 @@ network:
   ethernets:
     lo:
       addresses: ["127.0.0.1/8", "::1/128", "${lo}/32"]
+    eth0:
+      routes:
+        - to: ${remote}/32
+          via: ${local_gw}  
   tunnels:
     gre-${name}:
       mode: gre

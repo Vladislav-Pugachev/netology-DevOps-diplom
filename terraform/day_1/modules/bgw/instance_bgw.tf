@@ -2,6 +2,7 @@ resource "yandex_compute_instance" "bgw" {
   provider = yandex.dev
     name = "${terraform.workspace}-bgw-node"
     hostname = "${terraform.workspace}-bgw-node"
+    allow_stopping_for_update = true
     zone = "ru-central1-a"
     platform_id = "standard-v1"
     folder_id = var.folder_id
@@ -24,19 +25,19 @@ resource "yandex_compute_instance" "bgw" {
     metadata = {
         user-data = "${file("./users.yml")}"
   }
-    provisioner "file" {
-      source      = "ssh/id_rsa"
-      destination = ".ssh/id_rsa"
-      }
-    provisioner "remote-exec" {
-      inline = [
-        "sudo chmod 0600 .ssh/id_rsa",
-      ]
-    }
+    # provisioner "file" {
+    #   source      = "ssh/id_rsa"
+    #   destination = ".ssh/id_rsa"
+    #   }
+    # provisioner "remote-exec" {
+    #   inline = [
+    #     "sudo chmod 0600 .ssh/id_rsa",
+    #   ]
+    # }
     connection {
       host = yandex_compute_instance.bgw.network_interface.0.nat_ip_address
       type = "ssh"
-      user = "vlad"  
+      user = "pugachevvv"  
       private_key = "${file("./ssh/id_rsa")}"
     }
 }
