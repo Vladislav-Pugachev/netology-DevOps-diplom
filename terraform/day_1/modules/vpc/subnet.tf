@@ -1,5 +1,5 @@
 resource "yandex_vpc_subnet" "subnet" {
-  provider = yandex.dev 
+  provider = yandex.dev
   depends_on = [yandex_vpc_network.underlay]
   for_each = local.subnet
   v4_cidr_blocks = [each.value]

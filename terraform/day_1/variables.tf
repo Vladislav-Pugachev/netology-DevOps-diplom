@@ -16,3 +16,13 @@ variable "token" {
   description =  "Yandex token"
   type = string
 }
+
+variable "admin_bgw_external_ip" {
+    description = "ip ext адрес admin-bgw"
+    type= string
+}
+
+variable "admin_bgw_internal_ip" {
+    description = "ip int адрес admin-bgw"
+    type= string
+}
