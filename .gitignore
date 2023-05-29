@@ -5,5 +5,7 @@
 *.tfstate*
 terraform/day_1/provider.tf
 ssh
-users.yml
+cloud
+bgw_cloud
 aws
+kubespray
