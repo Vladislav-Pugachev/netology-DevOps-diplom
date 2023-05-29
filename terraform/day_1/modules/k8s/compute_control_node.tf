@@ -22,6 +22,6 @@ resource "yandex_compute_instance" "control_node" {
       ip_address = cidrhost(data.yandex_vpc_subnet.subnet_k8s["ru-central1-a"].v4_cidr_blocks[0], 253)
   }
   metadata = {
-    user-data = "${file("./users.yml")}"
+    user-data = "${file("./cloud")}"
   }
 }

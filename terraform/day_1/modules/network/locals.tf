@@ -14,3 +14,8 @@ locals {
 locals {
   as_bgw= "${terraform.workspace}" == "dev" ? "65001": "65002"
 }
+
+
+locals {
+  prefix_list = jsonencode(values({for k,v in var.nodes_private_ip_k8s : k => join("/",[cidrhost(join("/",[v,24]),254),32])}))
+}

@@ -24,7 +24,8 @@ resource "local_file" "bird_conf_env_bgw" {
     as_bgw = local.as_bgw
     node_internal_ip_bgw=var.node_internal_ip_bgw
     workspace="${terraform.workspace}"
-    nodes=var.nodes_private_ip_k8s
+    prefix_list=local.prefix_list
+    remotes = var.nodes_private_ip_k8s
 })
   filename = "./modules/ansible/roles/bird/files/${terraform.workspace}_bgw.conf"
 }

@@ -12,7 +12,7 @@ protocol kernel {
         learn;
         scan time 60;
         import all;
-       export all;   # Actually insert routes into the kernel routing table
+       export all;
 }
 
 protocol device {
@@ -22,3 +22,6 @@ protocol device {
 protocol direct {
         interface "*";
 }
+
+include "bgp.to_prod_bgw.conf";
+include "bgp.to_dev_bgw.conf"; 

@@ -21,6 +21,6 @@ resource "yandex_compute_instance" "bgw" {
         ip_address = cidrhost(data.yandex_vpc_subnet.underlay_subnet.v4_cidr_blocks[0], 253)
     }
     metadata = {
-        user-data = "${file("./users.yml")}"
+        user-data = "${file("./bgw_cloud")}"
   }
 }

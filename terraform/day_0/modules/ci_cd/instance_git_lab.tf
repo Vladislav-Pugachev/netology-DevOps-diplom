@@ -20,6 +20,6 @@ resource "yandex_compute_instance" "gitlab" {
         subnet_id = data.yandex_vpc_subnet.underlay_subnet.id
     }
     metadata = {
-        user-data = "${file("./users.yml")}"
+        user-data = "${file("./cloud")}"
   }
 }

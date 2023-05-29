@@ -16,10 +16,10 @@ network:
       addresses:
         - ${addresses}/30
       routes:
-        - to: ${routes_to}/32
-          via: ${routes_via}
         - to: default
           via: ${routes_via}
           from: ${lo}
           metric: 10
-          on-link: true 
+          on-link: true       
+        - to: ${routes_to}/32
+          via: ${routes_via}

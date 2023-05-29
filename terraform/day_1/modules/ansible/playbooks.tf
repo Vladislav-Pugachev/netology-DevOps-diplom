@@ -21,4 +21,17 @@ resource "null_resource" "netplan_apply_node_bgw" {
   }
 }
 
+resource "null_resource" "bird_env_node_bgw" {
+  depends_on = [null_resource.netplan_apply_admin_bgw]
+  provisioner "local-exec" {
+    command = "ansible-playbook -i ${var.node_external_ip_bgw}, ./modules/ansible/bird.yml --key-file ./ssh/id_rsa --skip-tags admin_bgw -e \"env=${terraform.workspace}\""
+  }
+}
+
+resource "null_resource" "bird_admin_bgw" {
+  depends_on = [null_resource.bird_env_node_bgw]
+  provisioner "local-exec" {
+    command = "ansible-playbook -i ${var.admin_bgw_external_ip}, ./modules/ansible/bird.yml --key-file ./ssh/id_rsa --skip-tags env_bgw -e \"env=${terraform.workspace}\""
+  }
+}
 
