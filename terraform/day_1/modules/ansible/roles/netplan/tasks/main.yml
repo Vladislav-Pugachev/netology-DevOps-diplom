@@ -1,0 +1,11 @@
+---
+- name: Add the gre module
+  community.general.modprobe:
+    name: ip_gre
+    state: present
+- name: Copy config
+  ansible.builtin.copy:
+    src: "gre_tunnels/{{ hostname }}.yaml"
+    dest: /etc/netplan/{{ hostname }}.yaml
+- name: Apply netplan config
+  ansible.builtin.shell: netplan apply

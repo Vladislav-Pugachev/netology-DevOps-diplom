@@ -61,3 +61,13 @@ module "network" {
     admin_bgw_external_ip=var.admin_bgw_external_ip
     admin_bgw_internal_ip=var.admin_bgw_internal_ip
 }
+
+module "ansible" {
+  depends_on = [module.network]
+    source = "./modules/ansible"
+    nodes_private_ip_k8s=module.k8s.nodes_private_ip_k8s
+    node_internal_ip_bgw=module.bgw.node_internal_ip_bgw
+    node_external_ip_bgw=module.bgw.node_external_ip_bgw
+    admin_bgw_external_ip=var.admin_bgw_external_ip
+    admin_bgw_internal_ip=var.admin_bgw_internal_ip
+}

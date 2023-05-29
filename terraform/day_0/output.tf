@@ -9,3 +9,7 @@ value= module.registry.registry_id
 output "admin_bgw_external_ip" {
 value= module.bgw.admin_bgw_external_ip
 }
+
+output "admin_bgw_internal_ip" {
+value= module.bgw.admin_bgw_internal_ip
+}

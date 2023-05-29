@@ -10,3 +10,7 @@ locals {
 locals {
   subnet_gre_bgw= "${terraform.workspace}" == "dev" ? "10.10.0.0/30": "10.20.0.0/30"
 }
+
+locals {
+  as_bgw= "${terraform.workspace}" == "dev" ? "65001": "65002"
+}

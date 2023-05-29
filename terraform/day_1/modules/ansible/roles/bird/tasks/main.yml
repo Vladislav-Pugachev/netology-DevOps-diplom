@@ -1,0 +1,31 @@
+---
+# tasks file for bird
+- name: Wait bird
+  ansible.builtin.wait_for:
+    path: /etc/bird/bird.conf
+  tags: always
+- name: touch file for dev bgw
+  ansible.builtin.file:
+    path: /etc/bird/dev_bgw.conf
+    state: touch
+  tags: admin_bgw
+- name: touch file for prod bgw
+  ansible.builtin.file:
+    path: /etc/bird/prod_bgw.conf
+    state: touch
+  tags: admin_bgw
+- name: Copy config to admin bgw
+  ansible.builtin.copy:
+    src: admin_bgw.conf
+    des: /etc/bird/bird.conf
+- name: Copy config to env bgw
+  ansible.builtin.copy:
+    src: "{{ env }}_bgw.conf"
+    des: /etc/bird/bird.conf
+  tags: env_bgw    
+- name: Copy config env config to admin bgw
+  ansible.builtin.copy:
+    src: "to_{{ env }}_bgw.conf"
+    des: /etc/bird/to_{{ env }}_bgw.conf
+  tags: admin_bgw
+  

@@ -12,7 +12,7 @@ resource "local_file" "gre_tunnels_k8s" {
     local_gw=cidrhost(join("/",[each.value,24]),1)
     workspace="${terraform.workspace}"   
 })
-  filename = "./modules/ansible/netplan/gre_tunnels/${each.key}.yaml"
+  filename = "./modules/ansible/roles/netplan/files/gre_tunnels/${each.key}.yaml"
 }
 
 resource "local_file" "gre_tunnels_work_bgw" {
@@ -27,7 +27,7 @@ resource "local_file" "gre_tunnels_work_bgw" {
     admin_bgw_internal_ip=var.admin_bgw_internal_ip
     subnet_gre_bgw=local.subnet_gre_bgw
 })
-  filename = "./modules/ansible/netplan/gre_tunnels/${terraform.workspace}-bgw-node.yaml"
+  filename = "./modules/ansible/roles/netplan/files/gre_tunnels/${terraform.workspace}-bgw-node.yaml"
 }
 
 
@@ -41,5 +41,5 @@ resource "local_file" "gre_tunnels_admin_bgw" {
     node_internal_ip_bgw=var.node_internal_ip_bgw
     workspace="${terraform.workspace}"
 })
-  filename = "./modules/ansible/netplan/gre_tunnels/admin-bgw-node.yaml"
+  filename = "./modules/ansible/roles/netplan/files/gre_tunnels/admin-bgw-node.yaml"
 }

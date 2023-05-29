@@ -17,4 +17,4 @@ network:
         - ${cidrhost(subnet_gre_bgw,2)}/30
       routes:
         - to: ${cidrhost(join("/",[node_internal_ip_bgw,24]),254)}/32
-          via: ${cidrhost(subnet_gre_bgw,2)}
+          via: ${cidrhost(subnet_gre_bgw,1)}

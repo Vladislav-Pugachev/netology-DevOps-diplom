@@ -1,0 +1,19 @@
+- name: Create gre tunnels
+  hosts: all
+  become: yes
+  vars:
+    - ansible_ssh_host_key_checking: False
+  gather_facts: false
+  pre_tasks:
+    - name: Enable forward
+      ansible.posix.sysctl:
+        name: net.ipv4.ip_forward
+        value: 1
+        sysctl_set: yes
+        state: present
+        reload: yes
+    - name: configure MASQUERADE
+      ansible.builtin.shell: iptables -t nat -A POSTROUTING ! -s 10.0.0.0/24 -o eth0 -j MASQUERADE
+      tags: iptables
+  roles:
+    - netplan

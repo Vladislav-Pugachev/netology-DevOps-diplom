@@ -23,4 +23,3 @@ variable "admin_bgw_internal_ip" {
     description = "ip int адрес admin-bgw"
     type= string
 }
-

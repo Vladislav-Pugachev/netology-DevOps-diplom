@@ -1,0 +1,6 @@
+---
+# handlers file for bird
+- name: restart bird
+  ansible.builrin.service:
+    name: bird
+    state: restarted

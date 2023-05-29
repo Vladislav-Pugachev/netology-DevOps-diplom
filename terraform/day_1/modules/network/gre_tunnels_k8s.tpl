@@ -20,4 +20,6 @@ network:
           via: ${routes_via}
         - to: default
           via: ${routes_via}
-          metric: 10 
+          from: ${lo}
+          metric: 10
+          on-link: true 
