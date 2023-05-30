@@ -6,20 +6,22 @@ resource "null_resource" "netplan_apply_node_k8s" {
 }
 
 
-resource "null_resource" "netplan_apply_admin_bgw" {
+resource "null_resource" "netplan_apply_node_bgw" {
   depends_on = [null_resource.netplan_apply_node_k8s]
+  provisioner "local-exec" {
+    command = "ansible-playbook -i ${var.node_external_ip_bgw}, ./modules/ansible/network.yaml --key-file ./ssh/id_rsa --skip-tags iptables -e \"hostname=${terraform.workspace}-bgw-node\""
+  }
+}
+
+resource "null_resource" "netplan_apply_admin_bgw" {
+  depends_on = [null_resource.netplan_apply_node_bgw]
   provisioner "local-exec" {
     command = "ansible-playbook -i ${var.admin_bgw_external_ip}, ./modules/ansible/network.yaml --key-file ./ssh/id_rsa -e \"hostname=admin-bgw-node\""
   }
 }
 
 
-resource "null_resource" "netplan_apply_node_bgw" {
-  depends_on = [null_resource.netplan_apply_admin_bgw]
-  provisioner "local-exec" {
-    command = "ansible-playbook -i ${var.node_external_ip_bgw}, ./modules/ansible/network.yaml --key-file ./ssh/id_rsa --skip-tags iptables -e \"hostname=${terraform.workspace}-bgw-node\""
-  }
-}
+
 
 resource "null_resource" "bird_env_node_bgw" {
   depends_on = [null_resource.netplan_apply_admin_bgw]

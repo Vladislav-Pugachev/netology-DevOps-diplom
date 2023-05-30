@@ -16,7 +16,7 @@ filter import_from_bgp {
         reject;
 }
 filter export_to_bgp {
-        if net~ ${prefix_list} then {
+        if net~ ${replace(prefix_list,"\"","")} then {
         accept;
         }
 
@@ -49,7 +49,7 @@ protocol bgp to_admin {
 
 %{ for key,values in remotes~}
 %{if key!= format("%s-control-node",workspace)}
-protocol bgp to_${key} {
+protocol bgp to_${replace(key,"-","_")} {
         local as ${as_bgw};
         multihop;
         neighbor  ${cidrhost(join("/",[values,24]),254)} as ${as_bgw};
