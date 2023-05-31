@@ -16,3 +16,8 @@ variable "k8s_image" {
     "worker_node"="fd8tckeqoshi403tks4l"
   }
 }
+
+variable "node_external_ip_bgw" {
+    description =  "внешний адрес env bgw"
+  type = string
+}

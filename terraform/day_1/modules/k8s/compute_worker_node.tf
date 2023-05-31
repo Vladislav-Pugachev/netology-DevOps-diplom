@@ -26,4 +26,18 @@ resource "yandex_compute_instance" "worker_node" {
   metadata = {
       user-data = "${file("./cloud")}"
   }
+    connection {
+    type ="ssh"
+    bastion_host = var.node_external_ip_bgw
+    bastion_private_key = "${file("./ssh/id_rsa")}"
+    bastion_user = "pugachevvv"
+    private_key = "${file("./ssh/id_rsa")}"
+    user="pugachevvv"
+    host=self.network_interface.0.ip_address
+  }
+  provisioner "remote-exec" {
+    inline = [
+      "echo 'instance up'"
+    ]
+  }
 }
