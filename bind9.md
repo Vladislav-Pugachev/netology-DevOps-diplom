@@ -1,0 +1,5 @@
+        forwarders {
+        8.8.8.8;
+        };
+        allow-query { any; };
+        listen-on { any; };

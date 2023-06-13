@@ -19,7 +19,7 @@ module "bgw" {
 }
 
 module "k8s" {
-  depends_on = [module.vpc]
+  depends_on = [module.bgw]
     providers = {
     yandex.dev = yandex.dev
     yandex.prod = yandex.prod

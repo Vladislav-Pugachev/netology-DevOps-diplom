@@ -1,7 +1,7 @@
 router id ${cidrhost(join("/",[node_internal_ip_bgw,24]),254)};
 
 filter export_to_kernel {
-        if net= 0.0.0.0/0 then {
+        if net~ [0.0.0.0/0,172.16.0.0/16+] then {
         accept;
         }
 
@@ -16,7 +16,7 @@ filter import_from_bgp {
         reject;
 }
 filter export_to_bgp {
-        if net~ ${replace(prefix_list,"\"","")} then {
+        if net~ ${replace(join(", ",[prefix_list, "172.16.0.0/16+"]),"\"","")} then {
         accept;
         }
 
