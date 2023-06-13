@@ -17,7 +17,7 @@ git remote add gitlab http://158.160.44.245/gitlab-instance-93491fdd/diplom.git
 
 gre
 
-
+ssh -i ssh/id_rsa -o ProxyCommand="ssh -i ssh/id_rsa -o StrictHostKeyChecking=no -W %h:%p 158.160.50.131" 10.1.1.254
 
 ########worker 1
 modprobe ip_gre
