@@ -21,8 +21,6 @@ resource "null_resource" "netplan_apply_admin_bgw" {
 }
 
 
-
-
 resource "null_resource" "bird_env_node_bgw" {
   depends_on = [null_resource.netplan_apply_admin_bgw]
   provisioner "local-exec" {

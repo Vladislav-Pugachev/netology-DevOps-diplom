@@ -25,19 +25,15 @@ resource "yandex_compute_instance" "bgw" {
     metadata = {
         user-data = "${file("./bgw_cloud")}"
   }
-    # provisioner "file" {
-    #   source      = "ssh/id_rsa"
-    #   destination = ".ssh/id_rsa"
-    #   }
-    # provisioner "remote-exec" {
-    #   inline = [
-    #     "sudo chmod 0600 .ssh/id_rsa",
-    #   ]
-    # }
     connection {
       host = yandex_compute_instance.bgw.network_interface.0.nat_ip_address
       type = "ssh"
-      user = "pugachevvv"  
+      user = "vlad"  
       private_key = "${file("./ssh/id_rsa")}"
     }
+    provisioner "remote-exec" {
+    inline = [
+      "echo 'instance up'"
+    ]
+  }
 }

@@ -1,0 +1,16 @@
+- name: get token gitlab
+  hosts: all
+  become: yes
+  gather_facts: false
+
+  tasks:
+  - name: Wait gitlab token
+    ansible.builtin.wait_for:
+      path: /etc/gitlab/initial_root_password
+      connect_timeout: 5
+      delay: 2
+  - name: Touch with token git lab
+    ansible.builtin.fetch:
+      src: /etc/gitlab/initial_root_password
+      dest: ./
+      flat: yes
