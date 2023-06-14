@@ -3,5 +3,5 @@ output "gitlab_ip" {
 }
 
 output "gitlab_token" {
-    value = null_resource.token_gitlab
+    value = data.external.gitlab_token.result.token_gitlab
 }

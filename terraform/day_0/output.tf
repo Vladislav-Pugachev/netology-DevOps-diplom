@@ -1,4 +1,4 @@
-output "ci_cd_ext_ip" {
+output "gitlab_ip" {
 value= module.ci_cd.gitlab_ip
 }
 

@@ -1,0 +1,38 @@
+- name: get token gitlab
+  hosts: all
+  gather_facts: false
+
+  tasks:
+  - name: Wait gitlab token
+    ansible.builtin.wait_for:
+      path: /etc/gitlab/initial_root_password
+      connect_timeout: 5
+      delay: 2  
+  - name: Cat token git lab
+    ansible.builtin.shell: |
+      cat /etc/gitlab/initial_root_password
+    register: file_content
+    become: yes
+  - name: Set fact token
+    ansible.builtin.set_fact:
+      token: "{{ file_content.stdout | regex_search(token_re, '\\1') | first }}"
+    vars:
+      token_re: 'Password:\s(\S+)'
+  - name: Create file
+    ansible.builtin.template:
+      src: ./token_gitlab.j2
+      dest: token_gitlab.json
+    delegate_to: localhost
+  - name: Pause play until a URL is reachable from this host
+    ansible.builtin.uri:
+      url: "http://{{ansible_ssh_host}}/users/sign_in"
+      follow_redirects: none
+      method: GET
+    register: _result
+    until: _result.status == 200
+    retries: 100
+    delay: 5
+  - name: Add access for api 
+    ansible.builtin.shell: |
+      gitlab-rails runner "token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api'], name: 'terraform'); token.set_token('pugachevvv-netology-diplom23'); token.save!"
+    become: yes

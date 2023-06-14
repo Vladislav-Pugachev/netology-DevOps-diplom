@@ -17,7 +17,7 @@ provider "yandex" {
 }
 
 provider "gitlab" {
-  base_url  = "https://gitlab.home.lan/api/v4/"
+  base_url  = "http://${module.ci_cd.gitlab_ip}/api/v4/"
   insecure  = true
-  token = local.token
+  token = "pugachevvv-netology-diplom23"
 }

@@ -7,3 +7,8 @@ data "yandex_vpc_subnet" "underlay_subnet" {
   folder_id= data.yandex_resourcemanager_folder.folder.id
   name = "underlay_subnet"
 }
+
+data "external" "gitlab_token" {
+  depends_on = [ null_resource.token_gitlab ]
+  program = ["bash", "${path.module}/token_gitlab.sh"]
+}

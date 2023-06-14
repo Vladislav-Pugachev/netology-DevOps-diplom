@@ -51,11 +51,9 @@ module "ci_cd" {
     depends_on = [module.vpc]
 }
 
-# module "gitlab" {
-#     source = "./modules/gitlab"
-#     depends_on = [module.ci_cd]
-#     gitlab_ip=module.ci_cd.gitlab_ip
-# }
+module "gitlab" {
+    source = "./modules/gitlab"
+}
 
 
 module "provider" {
