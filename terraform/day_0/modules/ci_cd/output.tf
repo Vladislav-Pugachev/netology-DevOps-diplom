@@ -3,5 +3,5 @@ output "gitlab_ip" {
 }
 
 output "gitlab_token" {
-    value = local.token_git_lab
+    value = null_resource.token_gitlab
 }

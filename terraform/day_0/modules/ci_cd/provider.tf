@@ -4,10 +4,6 @@ terraform {
       source = "yandex-cloud/yandex"
       version = "0.84.0"
     }
-          gitlab = {
-      source = "gitlabhq/gitlab"
-      version = "16.0.3"
-    }
   }
 }
 

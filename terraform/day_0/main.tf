@@ -49,7 +49,15 @@ module "ci_cd" {
     source = "./modules/ci_cd"
     cloud_id  = var.cloud_id
     depends_on = [module.vpc]
-} 
+}
+
+# module "gitlab" {
+#     source = "./modules/gitlab"
+#     depends_on = [module.ci_cd]
+#     gitlab_ip=module.ci_cd.gitlab_ip
+# }
+
+
 module "provider" {
     source = "./modules/provider"
     depends_on = [module.backend]

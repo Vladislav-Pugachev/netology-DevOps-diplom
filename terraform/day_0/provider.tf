@@ -15,3 +15,9 @@ provider "yandex" {
  token     = var.token
  cloud_id  = var.cloud_id
 }
+
+provider "gitlab" {
+  base_url  = "https://gitlab.home.lan/api/v4/"
+  insecure  = true
+  token = local.token
+}
