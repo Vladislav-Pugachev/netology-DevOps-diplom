@@ -1,5 +1,4 @@
 resource "yandex_compute_instance" "worker_node" {
-  provider = yandex.dev
   depends_on = [yandex_compute_instance.control_node]
   allow_stopping_for_update = true
   count = length(["ru-central1-b", "ru-central1-c"])

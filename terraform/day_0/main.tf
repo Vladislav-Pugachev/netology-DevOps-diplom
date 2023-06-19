@@ -66,4 +66,5 @@ module "provider" {
     yadb_endpoint=module.backend.yadb_endpoint
     admin_bgw_external_ip=module.bgw.admin_bgw_external_ip
     admin_bgw_internal_ip=module.bgw.admin_bgw_internal_ip
+//    folder_ws=module.folder.folder_ws
 } 

@@ -1,5 +1,4 @@
 resource "yandex_compute_instance" "bgw" {
-  provider = yandex.dev
     name = "${terraform.workspace}-bgw-node"
     hostname = "${terraform.workspace}-bgw-node"
     allow_stopping_for_update = true

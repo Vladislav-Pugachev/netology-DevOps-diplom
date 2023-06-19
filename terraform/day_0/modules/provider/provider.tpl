@@ -19,14 +19,7 @@ terraform {
 }
 }
 provider "yandex" {
- token     = var.token
  cloud_id  = var.cloud_id
+ service_account_key_file  = var.service_account_key_file
+ folder_id = var.folder_id
 }
-%{ for folder in folders~}
-provider "yandex" {
-  alias = "${folder.description}"
-  cloud_id  = var.cloud_id
-  service_account_key_file = "./admin-resourse-env-${folder.description}.json"
-  folder_id= var.folder_id_${folder.description}
-}
-%{ endfor ~}

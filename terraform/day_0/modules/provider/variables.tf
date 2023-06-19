@@ -1,18 +1,6 @@
-variable "env_day_1" {
-  description =  "окружение для среды разработки"
-  type = list
-  default =  ["dev", "prod"]
-}
-
 variable "cloud_id" {
   description =  "Yandex cloud_id"
   type = string
-}
-
-variable "token_false" {
-  description = "token false"
-  type= string
-  default = "false_token"
 }
 
 variable "yadb_endpoint" {
@@ -37,3 +25,8 @@ variable "admin_bgw_internal_ip" {
   description = "внутренний адрес bgw"
   type = string
 }
+
+# variable "folder_ws" {
+# //  type = object
+# }
+  

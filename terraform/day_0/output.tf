@@ -38,3 +38,6 @@ value= module.gitlab.gitlab_atlantis_api_token
 sensitive = true
 }
 
+output "folder_ws" {
+value= module.folder.folder_ws
+}

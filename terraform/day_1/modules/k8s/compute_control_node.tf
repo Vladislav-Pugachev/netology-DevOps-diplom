@@ -1,5 +1,4 @@
 resource "yandex_compute_instance" "control_node" {
-  provider = yandex.dev
   allow_stopping_for_update = true
   name = "${terraform.workspace}-control-node"
   hostname = "${terraform.workspace}-control-node"

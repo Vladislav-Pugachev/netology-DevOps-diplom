@@ -26,7 +26,7 @@ resource "yandex_compute_instance" "gitlab" {
       connection {
       host = yandex_compute_instance.gitlab.network_interface.0.nat_ip_address
       type = "ssh"
-      user = "pugachevvv"  
+      user = "vlad"  
       private_key = "${file("./ssh/id_rsa")}"
     }
     provisioner "remote-exec" {
