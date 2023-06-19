@@ -48,6 +48,7 @@ module "web-app" {
 module "ci_cd" {
     source = "./modules/ci_cd"
     cloud_id  = var.cloud_id
+    api_token_gitlab=var.api_token_gitlab
     depends_on = [module.vpc]
 }
 

@@ -16,4 +16,25 @@ value= module.bgw.admin_bgw_internal_ip
 
 output "gitlab_token" {
 value= module.ci_cd.gitlab_token
+sensitive = true
 }
+
+
+output "gitlab_atlantis_http" {
+value= module.gitlab.gitlab_atlantis_http
+}
+
+output "gitlab_web_app_http" {
+value= module.gitlab.gitlab_web_app_http
+}
+
+output "gitlab_web_app_runners_token" {
+value= module.gitlab.gitlab_web_app_runners_token
+sensitive = true
+}
+
+output "gitlab_atlantis_api_token" {
+value= module.gitlab.gitlab_atlantis_api_token
+sensitive = true
+}
+

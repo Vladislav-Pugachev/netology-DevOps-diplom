@@ -34,5 +34,5 @@
     delay: 5
   - name: Add access for api 
     ansible.builtin.shell: |
-      gitlab-rails runner "token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api'], name: 'terraform'); token.set_token('pugachevvv-netology-diplom23'); token.save!"
+      gitlab-rails runner "token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api'], name: 'terraform'); token.set_token('{{ api_token_gitlab }}'); token.save!"
     become: yes
