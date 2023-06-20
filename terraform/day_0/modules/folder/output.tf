@@ -1,3 +1,3 @@
 output "folder_ws" {
-    value = {for k in yandex_resourcemanager_folder.folder[*]: k.description=>k.id}
+value = {for k in yandex_resourcemanager_folder.folder: k.description=>k.id if k.description !="admin"}
 }

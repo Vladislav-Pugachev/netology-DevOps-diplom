@@ -36,15 +36,3 @@
     ansible.builtin.shell: |
       gitlab-rails runner "token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api'], name: 'terraform'); token.set_token('{{ api_token_gitlab }}'); token.save!"
     become: yes
-  - name: Install unzip
-    ansible.builtin.apt:
-      name:
-        - unzip
-      update_cache: yes
-    become: yes
-  - name: Get Atlantis
-    ansible.builtin.unarchive:
-      src: https://github.com/runatlantis/atlantis/releases/download/v0.24.2/atlantis_darwin_amd64.zip
-      dest: /usr/bin
-      remote_src: yes
-    become: yes

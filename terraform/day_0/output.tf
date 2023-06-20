@@ -1,5 +1,9 @@
-output "gitlab_ip" {
-value= module.ci_cd.gitlab_ip
+output "gitlab_external_ip" {
+value= module.ci_cd.gitlab_external_ip
+}
+
+output "gitlab_internal_ip" {
+value= module.ci_cd.gitlab_internal_ip
 }
 
 output "registry" {

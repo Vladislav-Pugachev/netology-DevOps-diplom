@@ -26,7 +26,7 @@ variable "admin_bgw_internal_ip" {
   type = string
 }
 
-# variable "folder_ws" {
-# //  type = object
-# }
+variable "folder_ws" {
+  type = map
+}
   

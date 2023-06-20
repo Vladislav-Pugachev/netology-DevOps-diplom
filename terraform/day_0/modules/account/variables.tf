@@ -3,9 +3,7 @@ variable "cloud_id" {
   type = string
 }
 
-variable "env_day_1" {
-  description =  "окружение для среды разработки"
-  type = list
-  default =  ["dev", "prod"]
-}
 
+variable "folder_ws" {
+  type = map
+}

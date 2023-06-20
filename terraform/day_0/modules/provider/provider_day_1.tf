@@ -10,15 +10,15 @@ resource "local_file" "provider-config" {
   filename = "../day_1/provider.tf"
 }
 
-# resource "local_file" "workspace_tfvars" {
-#   for_each = local.folder_ws_id
-#   content     = templatefile("./modules/provider/workspace.tpl",
-#   {
-#     cloud_id= var.cloud_id
-#     folder_id = each.value
-#     workspace = each.key
-#     admin_bgw_external_ip=var.admin_bgw_external_ip
-#     admin_bgw_internal_ip=var.admin_bgw_internal_ip
-# })
-#   filename = "../day_1/${each.key}.tfvars"
-# }
+resource "local_file" "workspace_tfvars" {
+  for_each = var.folder_ws
+  content     = templatefile("./modules/provider/workspace.tpl",
+  {
+    cloud_id= var.cloud_id
+    folder_id = each.value
+    workspace = each.key
+    admin_bgw_external_ip=var.admin_bgw_external_ip
+    admin_bgw_internal_ip=var.admin_bgw_internal_ip
+})
+  filename = "../day_1/${each.key}.tfvars"
+}

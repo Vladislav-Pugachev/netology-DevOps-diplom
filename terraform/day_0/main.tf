@@ -1,8 +1,6 @@
 module "folder" {
     source = "./modules/folder"
     cloud_id  = var.cloud_id
-    for_each = toset("${var.env}")
-    workdir = "${each.key}"
 }
 
 module "vpc" {
@@ -22,6 +20,8 @@ module "account" {
     source = "./modules/account"
     cloud_id  = var.cloud_id
     depends_on = [module.folder]
+    folder_ws=module.folder.folder_ws
+
 }
 module "backend" {
     source = "./modules/backend"
@@ -54,6 +54,8 @@ module "ci_cd" {
 
 module "gitlab" {
     source = "./modules/gitlab"
+    gitlab_internal_ip=module.ci_cd.gitlab_internal_ip
+    gitlab_external_ip=module.ci_cd.gitlab_external_ip
 }
 
 
@@ -66,5 +68,5 @@ module "provider" {
     yadb_endpoint=module.backend.yadb_endpoint
     admin_bgw_external_ip=module.bgw.admin_bgw_external_ip
     admin_bgw_internal_ip=module.bgw.admin_bgw_internal_ip
-//    folder_ws=module.folder.folder_ws
+    folder_ws=module.folder.folder_ws
 } 

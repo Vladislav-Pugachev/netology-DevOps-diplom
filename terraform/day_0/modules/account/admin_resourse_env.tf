@@ -1,22 +1,21 @@
 resource "yandex_iam_service_account" "admin-resourse" {
-  for_each = toset("${var.env_day_1}")
+  for_each = var.folder_ws
   name        = "admin-resourse-env-${each.key}"
   description = "service account for CRUD resourse in work environment"
-  folder_id = "${data.yandex_resourcemanager_folder.folder_work_env[each.key].id}"
-  depends_on = [data.yandex_resourcemanager_folder.folder_work_env]
+  folder_id = each.value
 }
 
  resource "yandex_iam_service_account_key" "admin-resourse-sa-auth-key" {
-  for_each = toset("${var.env_day_1}")
-  service_account_id = "${yandex_iam_service_account.admin-resourse[each.key].id}"
+  for_each = var.folder_ws
+  service_account_id = yandex_iam_service_account.admin-resourse[each.key].id
   description        = "key for service account admin resourse"
   key_algorithm      = "RSA_4096"
 }
 
 
 resource "yandex_resourcemanager_folder_iam_binding" "compute-admin-sa" {
-  for_each = toset("${var.env_day_1}")
-  folder_id = "${data.yandex_resourcemanager_folder.folder_work_env[each.key].id}"
+  for_each = var.folder_ws
+  folder_id = each.value
   role               = "compute.admin"
 
   members = [
@@ -25,8 +24,8 @@ resource "yandex_resourcemanager_folder_iam_binding" "compute-admin-sa" {
 }
 
 resource "yandex_resourcemanager_folder_iam_binding" "vpc-admin-iam" {
-  for_each = toset("${var.env_day_1}")
-  folder_id = "${data.yandex_resourcemanager_folder.folder_work_env[each.key].id}"
+  for_each = var.folder_ws
+  folder_id = each.value
   role               = "vpc.admin"
 
   members = [
@@ -35,7 +34,7 @@ resource "yandex_resourcemanager_folder_iam_binding" "vpc-admin-iam" {
 }
 
 resource "local_file" "admin-resourse-cred-json" {
-  for_each = toset("${var.env_day_1}")
+  for_each = var.folder_ws
   content     = jsonencode({
     "id" = yandex_iam_service_account_key.admin-resourse-sa-auth-key[each.key].id
     "service_account_id"  = yandex_iam_service_account_key.admin-resourse-sa-auth-key[each.key].service_account_id
@@ -45,8 +44,9 @@ resource "local_file" "admin-resourse-cred-json" {
     "private_key" = yandex_iam_service_account_key.admin-resourse-sa-auth-key[each.key].private_key
 })
   filename = "./admin-resourse-env-${each.key}.json"
-      provisioner "local-exec" {
-    command = "ln -s $(pwd)/admin-resourse-env-${each.key}.json ../day_1/admin-resourse-env-${each.key}.json"
+  
+  provisioner "local-exec" {
+    command = "cp $(pwd)/admin-resourse-env-${each.key}.json ../day_1/admin-resourse-env-${each.key}.json"
   }
   provisioner "local-exec" {
   command = "rm ../day_1/${self.filename}"

@@ -1,0 +1,43 @@
+- name: get token gitlab
+  hosts: all
+  gather_facts: false
+
+  tasks:
+  - name: Install unzip
+    ansible.builtin.apt:
+      name:
+        - unzip
+      update_cache: yes
+    become: yes
+  - name: Get Atlantis
+    ansible.builtin.unarchive:
+      src: https://github.com/runatlantis/atlantis/releases/download/v0.24.2/atlantis_linux_amd64.zip
+      dest: /usr/bin
+      remote_src: yes
+    become: yes
+  - name: Copy 'terraform'
+    ansible.builtin.copy:
+      src: /usr/local/bin/terraform
+      dest: /usr/bin/terraform
+      mode: '0755'
+    become: yes
+  - name: Copy atlantis service 
+    ansible.builtin.copy:
+      src: ./atlantis_service
+      dest: /etc/systemd/system/atlantis.service
+      mode: '0755'
+    become: yes
+  - name: run atlantis
+    ansible.builtin.systemd:
+      state: started
+      name: atlantis
+    become: yes
+  - name: allow tcp 4141
+    ansible.builtin.iptables:
+      chain: INPUT
+      jump: ACCEPT
+      protocol: tcp
+      match:
+        - tcp
+      destination_port: 4141
+    become: yes
