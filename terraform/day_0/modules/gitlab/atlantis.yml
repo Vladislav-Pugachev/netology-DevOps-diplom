@@ -1,4 +1,4 @@
-- name: get token gitlab
+- name: deploy atlantis
   hosts: all
   gather_facts: false
 
@@ -17,7 +17,7 @@
     become: yes
   - name: Copy 'terraform'
     ansible.builtin.copy:
-      src: /usr/local/bin/terraform
+      src: /opt/local/bin/terraform
       dest: /usr/bin/terraform
       mode: '0755'
     become: yes
@@ -41,3 +41,4 @@
         - tcp
       destination_port: 4141
     become: yes
+  - name: Install pip

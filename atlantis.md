@@ -13,3 +13,19 @@ ExecStart=/usr/bin/atlantis server --atlantis-url=http://10.0.0.4 --gitlab-user=
 
 [Install]
 WantedBy=multi-user.target
+
+
+
+/home/vlad/repos.yaml
+
+repos:
+- id: /.*/
+
+  # With just allowed_overrides: [workflow], repos can only
+  # choose workflows defined server-side.
+  allowed_overrides: [workflow]
+
+  # By setting allow_custom_workflows to true, we allow repos to also
+  # define their own workflows.
+  allow_custom_workflows: true
+~                                 
