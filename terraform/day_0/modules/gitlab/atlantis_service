@@ -1,0 +1,10 @@
+[Unit]
+Description=Atlantis
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/atlantis server --config=/home/pugachevvv/atlantis_config.yaml
+
+[Install]
+WantedBy=multi-user.target
+

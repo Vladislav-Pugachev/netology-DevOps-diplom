@@ -1,36 +1,10 @@
 version: 3
 projects:
-- name: project1-staging
-  dir: project1
-  workflow: staging
-- name: project1-production
-  dir: project1
-  workflow: production
-
-workflows:
-  staging:
-    plan:
-      steps:
-      - init
-      - plan:
-          extra_args: ["-var-file", "dev.tfvars"]
-  production:
-    plan:
-      steps:
-      - init
-      - plan:
-          extra_args: ["-var-file", "prod.tfvars"]
-    apply:
-      steps:
-        - apply:
-            extra_args: ["-var-file", "prod.tfvars"]
-    import:
-      steps:
-        - init
-        - import:
-            extra_args: ["-var-file", "prod.tfvars"]
-    state_rm:
-      steps:
-        - init
-        - state_rm:
-            extra_args: ["-lock=false"]
+- name: dev
+  dir: .
+  workflow: dev
+  workspace: dev
+- name: prod
+  dir: .
+  workflow: prod
+  workspace: prod

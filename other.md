@@ -20,6 +20,6 @@ web-app
 git remote add gitlab http://158.160.44.245/gitlab-instance-93491fdd/diplom.git
 
 gre
-ssh -i ssh/id_rsa -o ProxyCommand="ssh -i ssh/id_rsa -W %h:%p 151.250.84.225" 10.1.1.253
+ssh -i ssh/id_rsa -o ProxyCommand="ssh -i ssh/id_rsa -W %h:%p 158.160.112.233" 10.1.1.253
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --key-file ../../ssh/id_rsa --ssh-extra--args='-o ProxyCommand="ssh -i ../../ssh/id_rsa -o StrictHostKeyChecking=no -W %h:%p vlad@51.250.64.167"' -i inventory.yml ./kubespray/cluster.yml -b -v
 scp -i ssh/id_rsa 51.250.10.114:client-configs/files/vlad.ovpn vlad.ovpn

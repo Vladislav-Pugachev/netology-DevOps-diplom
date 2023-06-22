@@ -1,0 +1,31 @@
+repos:
+- id: /.*/
+  branch: /.*/
+  allowed_overrides: [workflow]
+workflows:
+  dev:
+    plan:
+      steps:
+      - init
+      - plan:
+          extra_args: ["-var-file", "dev.tfvars"]
+  prod:
+    plan:
+      steps:
+      - init
+      - plan:
+          extra_args: ["-var-file", "prod.tfvars"]
+    apply:
+      steps:
+        - apply:
+            extra_args: ["-var-file", "prod.tfvars"]
+    import:
+      steps:
+        - init
+        - import:
+            extra_args: ["-var-file", "prod.tfvars"]
+    state_rm:
+      steps:
+        - init
+        - state_rm:
+            extra_args: ["-lock=false"]      

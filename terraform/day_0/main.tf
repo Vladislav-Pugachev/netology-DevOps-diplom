@@ -53,6 +53,7 @@ module "ci_cd" {
 }
 
 module "gitlab" {
+    depends_on = [module.ci_cd]
     source = "./modules/gitlab"
     gitlab_internal_ip=module.ci_cd.gitlab_internal_ip
     gitlab_external_ip=module.ci_cd.gitlab_external_ip

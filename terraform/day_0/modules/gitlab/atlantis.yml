@@ -3,11 +3,19 @@
   gather_facts: false
 
   tasks:
-  - name: Install unzip
+  - name: Install package
     ansible.builtin.apt:
       name:
         - unzip
+        - python3.8
+        - python3-pip
+        - git
       update_cache: yes
+    become: yes
+  - name: Install ansible
+    ansible.builtin.pip:
+      name: ansible-core<2.13
+      executable: pip3
     become: yes
   - name: Get Atlantis
     ansible.builtin.unarchive:
@@ -15,9 +23,9 @@
       dest: /usr/bin
       remote_src: yes
     become: yes
-  - name: Copy 'terraform'
+  - name: Copy terraform
     ansible.builtin.copy:
-      src: /opt/local/bin/terraform
+      src: /usr/local/bin/terraform
       dest: /usr/bin/terraform
       mode: '0755'
     become: yes
@@ -25,6 +33,22 @@
     ansible.builtin.copy:
       src: ./atlantis_service
       dest: /etc/systemd/system/atlantis.service
+      mode: '0755'
+    become: yes
+  - name: Copy atlantis config 
+    ansible.builtin.copy:
+      src: ./atlantis_config.yaml
+      dest: /home/pugachevvv/atlantis_config.yaml
+      mode: '0755'
+  - name: Copy atlantis config repos
+    ansible.builtin.copy:
+      src: ./atlantis_repos.yaml
+      dest: /home/pugachevvv/repos.yaml
+      mode: '0755'
+  - name: Copy terraformrc
+    ansible.builtin.copy:
+      src: /home/pugachevvv/.terraformrc
+      dest: /root/.terraformrc
       mode: '0755'
     become: yes
   - name: run atlantis
@@ -41,4 +65,3 @@
         - tcp
       destination_port: 4141
     become: yes
-  - name: Install pip
