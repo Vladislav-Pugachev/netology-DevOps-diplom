@@ -12,3 +12,7 @@ data "external" "gitlab_token" {
   depends_on = [ null_resource.token_gitlab ]
   program = ["bash", "${path.module}/token_gitlab.sh"]
 }
+
+data "yandex_compute_image" "gitlab" {
+  family = "ubuntu-2204-lts"
+}

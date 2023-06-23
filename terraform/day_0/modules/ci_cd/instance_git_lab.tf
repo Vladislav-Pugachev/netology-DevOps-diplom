@@ -6,14 +6,13 @@ resource "yandex_compute_instance" "gitlab" {
     platform_id = "standard-v1"
     folder_id = data.yandex_resourcemanager_folder.folder.id
     resources {
-      cores = 4
-      memory = 4
+      cores = 6
+      memory = 6
     }
     boot_disk {
       initialize_params {
-        image_id = "fd83vstafqja7ql1kj0b"
+        image_id = data.yandex_compute_image.gitlab.id
         size = 50
-        type="network-ssd"
       }
     }
     network_interface {
