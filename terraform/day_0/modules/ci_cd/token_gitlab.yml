@@ -21,6 +21,14 @@
       name:
         - gitlab-ce
     become: yes
+    # environment:
+    #   EXTERNAL_URL: "http://{{ ansible_ssh_host }}"
+  - name: replace external address gitlab
+    ansible.builtin.replace:
+      path: /etc/gitlab/gitlab.rb
+      regexp: 'gitlab.example.com'
+      replace: "{{ ansible_ssh_host }}"
+    become: yes
   - name: Reconfig gitlab
     ansible.builtin.shell: gitlab-ctl reconfigure
     become: yes
@@ -57,5 +65,3 @@
     ansible.builtin.shell: |
       gitlab-rails runner "time = Time.zone.now; token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api'], name: 'terraform', expires_at: time+1.week); token.set_token('{{ api_token_gitlab }}');token.save!"
     become: yes
-
-
