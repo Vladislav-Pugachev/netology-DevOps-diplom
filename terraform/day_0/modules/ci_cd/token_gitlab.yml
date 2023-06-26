@@ -21,8 +21,6 @@
       name:
         - gitlab-ce
     become: yes
-    # environment:
-    #   EXTERNAL_URL: "http://{{ ansible_ssh_host }}"
   - name: replace external address gitlab
     ansible.builtin.replace:
       path: /etc/gitlab/gitlab.rb

@@ -11,5 +11,5 @@ resource "gitlab_project_hook" "webhook_atlantis" {
   push_events = true
   note_events = true
   enable_ssl_verification = false
-  push_events_branch_filter = "*"
+//  push_events_branch_filter = "*"
 }

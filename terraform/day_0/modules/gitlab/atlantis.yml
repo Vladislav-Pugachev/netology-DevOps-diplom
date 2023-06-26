@@ -16,6 +16,12 @@
       name: ansible-core<2.13
       executable: pip3
     become: yes
+  - name: Install collection general
+    ansible.builtin.shell: ansible-galaxy collection install community.general
+    become: yes
+  - name: Install collection posix
+    ansible.builtin.shell: ansible-galaxy collection install ansible.posix
+    become: yes    
   - name: Get Atlantis
     ansible.builtin.unarchive:
       src: https://github.com/runatlantis/atlantis/releases/download/v0.24.2/atlantis_linux_amd64.zip

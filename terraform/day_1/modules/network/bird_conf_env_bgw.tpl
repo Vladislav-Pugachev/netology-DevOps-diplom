@@ -16,7 +16,7 @@ filter import_from_bgp {
         reject;
 }
 filter export_to_bgp {
-        if net~ ${replace(join(", ",[prefix_list, "172.16.0.0/16+"]),"\"","")} then {
+        if net~ [${replace(prefix_list,"\"","")}] then {
         accept;
         }
 
