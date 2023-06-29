@@ -3,7 +3,7 @@ cat user-registry.json | docker login   --username json_key   --password-stdin  
 kubectl create secret generic regcred     --from-file=.dockerconfigjson=$HOME/.docker/config.json   --type=kubernetes.io/dockerconfigjson -n kube-system
 kubectl create secret -n kube-system generic webapp --from-literal access_key=$(cat user-web.json |  jq '.access_key') --from-literal secret_key=$(cat user-web.json |  jq '.secret_key')
 sudo cat /etc/gitlab/initial_root_password
-terraform destroy -target=module.vpc -target=module.ci_cd -target=module.backend -target=module.web-app -target=module.registry -target=module.gitlab -auto-approve
+terraform destroy -target=module.vpc -target=module.backend -target=module.web-app -target=module.registry  -auto-approve
 terraform apply -target=module.vpc -target=module.ci_cd -target=module.backend -target=module.web-app -target=module.registry -target=module.gitlab -auto-approve
 
 sudo gitlab-rails runner "token = User.find_by_username('root').personal_access_tokens.create(scopes: ['api'], name: 'terraform'); token.set_token('token-string-here123'); token.save!"
@@ -27,7 +27,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --key-file ../../ssh/id_rsa --s
 scp -i ssh/id_rsa 51.250.10.114:client-configs/files/vlad.ovpn vlad.ovpn
 
 
-ansible-galaxy collection install community.general
+ansible-galaxy collection install community.general.modprobe
 ansible-galaxy collection install ansible.posix
 
 atlantis plan -p dev
